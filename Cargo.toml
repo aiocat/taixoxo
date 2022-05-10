@@ -7,3 +7,4 @@ edition = "2021"
 
 [dependencies]
 winapi = { version = "0.3.9", features = ["wingdi", "winuser", "windef"] }
+sysinfo = "0.23.11"
