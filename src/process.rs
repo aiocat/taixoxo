@@ -1,22 +1,22 @@
 // Copyright (C) 2022 aiocat
-// 
+//
 // This file is part of taixoxo.
-// 
+//
 // taixoxo is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // taixoxo is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with taixoxo.  If not, see <http://www.gnu.org/licenses/>.
 
-use winapi::um::winuser::{GetWindowThreadProcessId, GetForegroundWindow, GetWindowRect};
 use winapi::shared::windef::{HWND, RECT};
+use winapi::um::winuser::{GetForegroundWindow, GetWindowRect, GetWindowThreadProcessId};
 
 use sysinfo::{PidExt, ProcessExt, System, SystemExt};
 
@@ -25,7 +25,7 @@ pub type Window = HWND; // alias for HWND
 
 // create new rect
 fn new_rect() -> RECT {
-    Rectange{
+    Rectange {
         left: 0,
         right: 0,
         top: 0,
@@ -74,7 +74,7 @@ pub fn get_osu_pid() -> u32 {
 
     for (pid, process) in system.processes() {
         if process.name() == "osu!.exe" {
-            return pid.as_u32()
+            return pid.as_u32();
         }
     }
 

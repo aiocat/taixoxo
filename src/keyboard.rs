@@ -15,26 +15,13 @@
 // You should have received a copy of the GNU General Public License
 // along with taixoxo.  If not, see <http://www.gnu.org/licenses/>.
 
-use winapi::shared::windef::HDC;
-use winapi::um::wingdi::{GetBValue, GetGValue, GetPixel, GetRValue};
-use winapi::um::winuser::{GetDC, ReleaseDC};
+use winput::send;
+use winput::Button::{Left, Right};
 
-use std::ptr;
-
-pub type Screen = HDC; // alias for HDC
-
-// get screen function
-pub fn get_screen() -> Screen {
-    unsafe { GetDC(ptr::null_mut()) }
+pub fn press_for_red() {
+    send(Left);
 }
 
-// free screen function for memory safety
-pub fn free_screen(screen: Screen) -> bool {
-    (unsafe { ReleaseDC(ptr::null_mut(), screen) }) as u8 == 1
-}
-
-// get pixel color from x and y position
-pub fn get_pixel(screen: Screen, x: i32, y: i32) -> (u8, u8, u8) {
-    let color = unsafe { GetPixel(screen, x, y) };
-    (GetRValue(color), GetGValue(color), GetBValue(color))
+pub fn press_for_blue() {
+    send(Right);
 }
