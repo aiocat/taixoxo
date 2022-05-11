@@ -18,8 +18,16 @@
 use winput::send;
 use winput::Button::{Left, Right};
 
+use std::thread::sleep;
+use std::time::Duration;
+
 pub fn press_for_red() {
     send(Left);
+}
+
+pub fn press_for_yellow() {
+    send(Left);
+    sleep(Duration::from_millis(50));
 }
 
 pub fn press_for_blue() {

@@ -18,20 +18,25 @@ mod keyboard;
 mod process;
 mod screen;
 
+use std::process::exit;
 use std::thread::sleep;
 use std::time::Duration;
-use std::process::exit;
 
 fn main() {
     let screen_handle = screen::get_screen();
     let osu_pid = process::get_osu_pid();
 
-    // constants for red and blue taiko
+    // constants for red, blue and yellow taiko
     let (blue_r, blue_g, blue_b) = (60..70, 130..140, 140..180);
     let (red_r, red_g, red_b) = (200..255, 60..70, 40..50);
+    let (yellow_r, yellow_g, yellow_b) = (210..255, 160..180, 0..20);
 
     // info message
-    println!("[INFO] Please focus on your osu! window in 5 seconds. (and don't move your window when bot initialized!)");
+    println!("taixoxo v0.0.1 =>");
+    println!("  source code: github.com/aiocat/taixoxo");
+    println!("  owner: github.com/aiocat");
+    println!("  license: GNU General Public License v3\n");
+    println!("[INFO] Please focus on your osu! window in 5 seconds. (and don't move your osu! window when bot initialized!)");
     sleep(Duration::from_secs(5));
 
     // get active window
@@ -60,17 +65,21 @@ fn main() {
     // edit position for size
     match size {
         (629, 806) => {
-            pos_x += 200;
+            pos_x += 190;
             pos_y += 265;
         },
         (797, 1030) => {
             pos_x += 240;
             pos_y += 333;
         },
-        _ => app_panic("Switch to window mode and set your window size to one of the following options:\n  - (800x600)\n  - (1024x768)"),
+        (893, 1158) => {
+            pos_x += 260;
+            pos_y += 360;
+        }
+        _ => app_panic("Switch to window mode and set your window size to one of the following options:\n  - (800x600)\n  - (1024x768)\n  - (1152x864)"),
     }
 
-    println!("[INFO] Bot initialized! Please don't move your window.");
+    println!("[INFO] Bot initialized! Please don't move your osu! window.");
 
     // main part of the bot
     let mut need_to_click = true;
@@ -78,11 +87,19 @@ fn main() {
         let (r, g, b) = screen::get_pixel(screen_handle, pos_x, pos_y);
 
         // check pixel
-        if blue_r.contains(&r) && blue_g.contains(&g) && blue_b.contains(&b) && need_to_click {
+        if red_r.contains(&r) && red_g.contains(&g) && red_b.contains(&b) && need_to_click {
+            keyboard::press_for_red();
+            need_to_click = false;
+        } else if blue_r.contains(&r) && blue_g.contains(&g) && blue_b.contains(&b) && need_to_click
+        {
             keyboard::press_for_blue();
             need_to_click = false;
-        } else if red_r.contains(&r) && red_g.contains(&g) && red_b.contains(&b) && need_to_click {
-            keyboard::press_for_red();
+        } else if yellow_r.contains(&r)
+            && yellow_g.contains(&g)
+            && yellow_b.contains(&b)
+            && need_to_click
+        {
+            keyboard::press_for_yellow();
             need_to_click = false;
         } else {
             need_to_click = true;
