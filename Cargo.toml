@@ -9,3 +9,4 @@ edition = "2021"
 winapi = { version = "0.3.9", features = ["wingdi", "winuser", "windef"] }
 sysinfo = "0.23.11"
 winput = "0.2.5"
+ctrlc = "3.2.2"
