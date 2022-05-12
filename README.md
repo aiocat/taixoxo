@@ -31,6 +31,10 @@ osu!taiko bot for Windows
 
 </div>
 
+## Before Starting
+
+Don't sign in or play ranked maps. You might get banned. Don't be evil.
+
 ## Download
 
 You can download latest release from [here](https://github.com/aiocat/dll-crab/releases/latest).
