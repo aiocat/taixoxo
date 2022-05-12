@@ -1,11 +1,20 @@
 [package]
 name = "taixoxo"
-version = "0.1.0"
+version = "1.0.0"
 edition = "2021"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+build = "build.rs"
 
 [dependencies]
 winapi = { version = "0.3.9", features = ["wingdi", "winuser", "windef"] }
 sysinfo = "0.23.11"
 winput = "0.2.5"
+
+[build-dependencies]
+winres = "0.1"
+
+[package.metadata.winres]
+OriginalFilename = "taixoxo.exe"
+LegalCopyright = "Copyright © 2022"
+FileDescription = "osu!taiko bot for Windows"
+ProductName = "Taixoxo"
+ProductVersion = "1.0.0.0"

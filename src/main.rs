@@ -31,12 +31,15 @@ fn main() {
     let (red_r, red_g, red_b) = (200..255, 60..70, 40..50);
     let (yellow_r, yellow_g, yellow_b) = (210..255, 160..180, 0..20);
 
+    // title
+    println!("Taixoxo v1.0.0 =>");
+    println!("- Source Code: github.com/aiocat/taixoxo");
+    println!("- License: GNU General Public License v3\n");
+
     // info message
-    println!("taixoxo v0.0.1 =>");
-    println!("  source code: github.com/aiocat/taixoxo");
-    println!("  owner: github.com/aiocat");
-    println!("  license: GNU General Public License v3\n");
-    println!("[INFO] Please focus on your osu! window in 5 seconds. (and don't move your osu! window when bot initialized!)");
+    println!(
+        "[INFO] Please focus on your osu! window in 5 seconds. (and don't move your osu! window)"
+    );
     sleep(Duration::from_secs(5));
 
     // get active window
@@ -76,7 +79,7 @@ fn main() {
             pos_x += 260;
             pos_y += 360;
         }
-        _ => app_panic("Switch to window mode and set your window size to one of the following options:\n  - (800x600)\n  - (1024x768)\n  - (1152x864)"),
+        _ => app_panic("Switch osu! to window mode and set your window size to one of the following options:\n  - (800x600)\n  - (1024x768) [recommended]\n  - (1152x864)"),
     }
 
     println!("[INFO] Bot initialized! Please don't move your osu! window.");
