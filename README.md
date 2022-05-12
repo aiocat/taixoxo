@@ -35,6 +35,8 @@ osu!taiko bot for Windows
 
 You can download latest release from [here](https://github.com/aiocat/dll-crab/releases/latest).
 
+Don't move `taixoxo.exe` to another folder, instead move `taixoxo` folder to anywhere you want.
+
 ## Usage
 
 - You must install modded version fo technosu skin first. If you want to install automatically, just open `setup-skin.bat` as administrator in taixoxo folder and it will install it. Then open osu! and select `Technosu Modden (v1.0)` skin.
