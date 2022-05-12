@@ -58,6 +58,19 @@ _if you want to see an example, please watch [this](https://www.veed.io/view/8cd
 - It can't do `%100` acc all times. You need to retry until it does.
 - If you want better acc, just increase your FPS.
 
+### Options
+
+| Setting              | Value     |
+| -------------------- | --------- |
+| Frame Limiter        | Unlimited |
+| Fullscreen Mode      | Off       |
+| Resolution           | 1024x768  |
+| Ignore Beatmap Theme | On        |
+| Raw Input            | On        |
+| Background Video     | Off       |
+
+And close all effects. Like parallax, combo bursts and so on.
+
 ## Technologies
 
 This project is built with Rust programming language. You can view which libraries are used in `Cargo.toml` file.
