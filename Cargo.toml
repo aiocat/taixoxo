@@ -1,6 +1,6 @@
 [package]
 name = "taixoxo"
-version = "1.1.1"
+version = "1.1.2"
 edition = "2021"
 build = "build.rs"
 
@@ -17,4 +17,4 @@ OriginalFilename = "taixoxo.exe"
 LegalCopyright = "Copyright © 2022"
 FileDescription = "osu!taiko bot for Windows"
 ProductName = "Taixoxo"
-ProductVersion = "1.1.1.0"
+ProductVersion = "1.1.2.0"
