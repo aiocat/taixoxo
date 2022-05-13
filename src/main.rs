@@ -83,7 +83,12 @@ fn main() {
             pos_x = 330;
             pos_y = 450;
         }
-        _ => app_panic("Switch osu! to window mode and set your window size to one of the following options:\n  - (800x600)\n  - (1024x768) [recommended]\n  - (1152x864)\n  - (1920x1080 borderless) [recommended]"),
+        _ => {
+            pos_x = 330;
+            pos_y = 450;
+
+            println!("You are not in supported mode. Switch osu! to window mode and set your window size to one of the following options:\n  - (800x600)\n  - (1024x768) [recommended]\n  - (1152x864)\n  - (1920x1080 borderless) [recommended]")
+        },
     }
 
     println!("[INFO] Bot initialized! Please don't move your osu! window.");
