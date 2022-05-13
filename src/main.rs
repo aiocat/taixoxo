@@ -77,8 +77,8 @@ fn main() {
             pos_y += 330;
         }
         (797, 1372) | (768, 1366) | (769, 1366) => {
-            pos_x += 252;
-            pos_y += 325;
+            pos_x += 242;
+            pos_y += 330;
         }
         (893, 1158) | (864, 1152) | (865, 1152) => {
             pos_x += 260;
@@ -89,10 +89,7 @@ fn main() {
             pos_y = 450;
         }
         _ => {
-            pos_x = 330;
-            pos_y = 450;
-
-            println!("You are not in supported mode. Switch osu! to window mode and set your window size to one of the following options:\n  - (800x600)\n  - (1024x768) [recommended]\n  - (1152x864)\n  - (1920x1080 borderless) [recommended]\n  - (1366x768) [experimental]")
+            app_panic("You are not in supported window size. Switch osu! to window mode and set your window size to one of the following options:\n  - (800x600)\n  - (1024x768) [recommended]\n  - (1152x864)\n  - (1920x1080 borderless) [most recommended]\n  - (1366x768) [recommended]")
         }
     }
 

@@ -45,7 +45,7 @@ move .\target\release\taixoxo.exe .\build\taixoxo\taixoxo.exe
 echo f | xcopy /f /y .\README.md .\build\taixoxo\README.md
 echo f | xcopy /f /y .\LICENSE .\build\taixoxo\LICENSE
 echo f | xcopy /f /y .\assets\setup-skin.bat .\build\taixoxo\setup-skin.bat
-echo f | xcopy /f /y ".\assets\Technosu Modded (v1.0).zip" ".\build\taixoxo\Technosu Modded (v1.0).zip"
+echo f | xcopy /f /y ".\assets\Technosu Modded (v1.0).osk" ".\build\taixoxo\Technosu Modded (v1.0).osk"
 
 : into build folder
 cd .\build
