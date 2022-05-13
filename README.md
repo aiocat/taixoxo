@@ -33,7 +33,7 @@ osu!taiko bot for Windows
 
 ## Before Starting
 
-Don't sign in or play ranked maps. You might get banned. Don't be evil.
+Don't sign in or play ranked maps. You might get banned. Don't be evil. Use this software at your own risk!
 
 ## Download
 

@@ -60,7 +60,7 @@ fn main() {
         position.bottom - position.top,
         position.right - position.left,
     );
-    println!("{:?}", size);
+    // println!("{:?}", size);
 
     // x and y position for pixel
     let mut pos_x = position.left;
