@@ -60,6 +60,7 @@ fn main() {
         position.bottom - position.top,
         position.right - position.left,
     );
+    println!("{:?}", size);
 
     // x and y position for pixel
     let mut pos_x = position.left;
@@ -67,28 +68,32 @@ fn main() {
 
     // edit position for size
     match size {
-        (629, 806) => {
+        (629, 806) | (600, 800) | (601, 800) => {
             pos_x += 190;
             pos_y += 265;
-        },
-        (797, 1030) => {
+        }
+        (797, 1030) | (768, 1024)  | (769, 1024) => {
             pos_x += 240;
             pos_y += 330;
+        }
+        (797, 1372) | (768, 1366) | (769, 1366) => {
+            pos_x += 252;
+            pos_y += 325;
         },
-        (893, 1158) => {
+        (893, 1158) | (864, 1152) | (865, 1152) => {
             pos_x += 260;
             pos_y += 360;
         },
-        (1081, 1920) => {
+        (1081, 1920) | (1080, 1920) => {
             pos_x = 330;
             pos_y = 450;
-        }
+        },
         _ => {
             pos_x = 330;
             pos_y = 450;
 
-            println!("You are not in supported mode. Switch osu! to window mode and set your window size to one of the following options:\n  - (800x600)\n  - (1024x768) [recommended]\n  - (1152x864)\n  - (1920x1080 borderless) [recommended]")
-        },
+            println!("You are not in supported mode. Switch osu! to window mode and set your window size to one of the following options:\n  - (800x600)\n  - (1024x768) [recommended]\n  - (1152x864)\n  - (1920x1080 borderless) [recommended]\n  - (1366x768) [experimental]")
+        }
     }
 
     println!("[INFO] Bot initialized! Please don't move your osu! window.");
