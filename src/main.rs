@@ -14,7 +14,7 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with taixoxo.  If not, see <http://www.gnu.org/licenses/>.
-mod keyboard;
+mod input;
 mod process;
 mod screen;
 
@@ -95,18 +95,18 @@ fn main() {
 
         // check pixel
         if red_r.contains(&r) && red_g.contains(&g) && red_b.contains(&b) && need_to_click {
-            keyboard::press_for_red();
+            input::press_for_red();
             need_to_click = false;
         } else if blue_r.contains(&r) && blue_g.contains(&g) && blue_b.contains(&b) && need_to_click
         {
-            keyboard::press_for_blue();
+            input::press_for_blue();
             need_to_click = false;
         } else if yellow_r.contains(&r)
             && yellow_g.contains(&g)
             && yellow_b.contains(&b)
             && need_to_click
         {
-            keyboard::press_for_yellow();
+            input::press_for_yellow();
             need_to_click = false;
         } else {
             need_to_click = true;
