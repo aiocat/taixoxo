@@ -32,7 +32,7 @@ fn main() {
     let (yellow_r, yellow_g, yellow_b) = (210..255, 160..180, 0..20);
 
     // title
-    println!("Taixoxo v1.0.0 =>");
+    println!("Taixoxo v1.1.0 =>");
     println!("- Source Code: github.com/aiocat/taixoxo");
     println!("- License: GNU General Public License v3\n");
 
