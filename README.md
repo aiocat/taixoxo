@@ -43,7 +43,7 @@ Don't move `taixoxo.exe` to another folder, instead move `taixoxo` folder to any
 
 ## Usage
 
-- You must install modded version fo technosu skin first. If you want to install automatically, just open `setup-skin.bat` as administrator in taixoxo folder and it will install it. Then open osu! and select `Technosu Modden (v1.0)` skin.
+- You must install modded version fo technosu skin first. If you want to install automatically, just open `Technosu Modden (v1.0).osk` and it will load the skin. Then open osu! and select `Technosu Modden (v1.0)` skin.
 - Switch osu! to window mode and select one of these resolution:
   - 800x600
   - 1024x768 (**recommended**)
