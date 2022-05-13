@@ -48,6 +48,7 @@ Don't move `taixoxo.exe` to another folder, instead move `taixoxo` folder to any
   - 800x600
   - 1024x768 (**recommended**)
   - 1152x864
+  - 1920x1080 (**most recommended**)
 - Open taixoxo and focus on your osu! window. it will initialize the bot after 5 (five) seconds. Please do not move your osu! window while you are using taixoxo.
 - Open a game and have fun! Taixoxo will handle red, blue and yellow drums.
 
@@ -64,7 +65,7 @@ _if you want to see an example, please watch [this](https://www.veed.io/view/8cd
 | -------------------- | --------- |
 | Frame Limiter        | Unlimited |
 | Fullscreen Mode      | Off       |
-| Resolution           | 1024x768  |
+| Resolution           | 1920x1080 |
 | Ignore Beatmap Theme | On        |
 | Raw Input            | On        |
 | Background Video     | Off       |
