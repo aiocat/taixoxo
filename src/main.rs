@@ -73,13 +73,17 @@ fn main() {
         },
         (797, 1030) => {
             pos_x += 240;
-            pos_y += 333;
+            pos_y += 330;
         },
         (893, 1158) => {
             pos_x += 260;
             pos_y += 360;
+        },
+        (1081, 1920) => {
+            pos_x = 330;
+            pos_y = 450;
         }
-        _ => app_panic("Switch osu! to window mode and set your window size to one of the following options:\n  - (800x600)\n  - (1024x768) [recommended]\n  - (1152x864)"),
+        _ => app_panic("Switch osu! to window mode and set your window size to one of the following options:\n  - (800x600)\n  - (1024x768) [recommended]\n  - (1152x864)\n  - (1920x1080 borderless) [recommended]"),
     }
 
     println!("[INFO] Bot initialized! Please don't move your osu! window.");
