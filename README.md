@@ -37,7 +37,7 @@ Don't sign in or play ranked maps. You might get banned. Don't be evil.
 
 ## Download
 
-You can download latest release from [here](https://github.com/aiocat/dll-crab/releases/latest).
+You can download latest release from [here](https://github.com/aiocat/taixoxo/releases/latest).
 
 Don't move `taixoxo.exe` to another folder, instead move `taixoxo` folder to anywhere you want.
 
