@@ -53,6 +53,11 @@ Don't move `taixoxo.exe` to another folder, instead move `taixoxo` folder to any
 - Open taixoxo and focus on your osu! window. it will initialize the bot after 5 (five) seconds. Please do not move your osu! window while you are using taixoxo.
 - Open a game and have fun! Taixoxo will handle red, blue and yellow drums.
 
+### Keys
+
+- Press `HOME` to enable/disable bot.
+- Press `END` to quit program safely.
+
 _if you want to see an example, please watch [this](https://www.youtube.com/watch?v=xSlvpcV0C2k) video._
 
 ## Tips
