@@ -20,8 +20,7 @@ mod screen;
 
 use std::process::exit;
 use std::sync::{Arc, Mutex};
-use std::thread;
-use std::thread::sleep;
+use std::thread::{sleep, spawn};
 use std::time::Duration;
 
 use winput::message_loop;
@@ -101,23 +100,28 @@ fn main() {
             pos_y = 450;
         }
         _ => {
-            app_panic("You are not in supported window size. Switch osu! to window mode and set your window size to one of the following options:\n  - (800x600)\n  - (1024x768) [recommended]\n  - (1152x864)\n  - (1920x1080 borderless) [most recommended]\n  - (1366x768) [recommended]")
+            app_panic("You are not in supported window size. Switch osu! to window mode and set your window size to one of the following options:
+  - (800x600)
+  - (1024x768) [recommended]
+  - (1152x864)
+  - (1920x1080 borderless) [most recommended]
+  - (1366x768) [recommended]")
         }
     }
-
     app_info("Bot initialized! Please don't move your osu! window.");
 
     // run another thread to wait for keys
     // manage bot status
     let bot_status = Arc::new(Mutex::new(TaixoxoStatus::Enabled));
     let thread_bot_status = bot_status.clone();
-    thread::spawn(move || {
-        wait_keys(thread_bot_status);
+    spawn(move || {
+        handle_keys(thread_bot_status);
     });
 
     // main part of the bot
     let mut need_to_click = true;
     loop {
+        // check bot status
         let status = bot_status.lock().unwrap();
         if *status == TaixoxoStatus::Disabled {
             continue;
@@ -151,7 +155,8 @@ fn main() {
     screen::free_screen(screen_handle);
 }
 
-fn wait_keys(data: Arc<Mutex<TaixoxoStatus>>) {
+// this function handle user inputs like toggle bot, close bot etc...
+fn handle_keys(data: Arc<Mutex<TaixoxoStatus>>) {
     let receiver = message_loop::start().unwrap();
 
     loop {
@@ -161,9 +166,8 @@ fn wait_keys(data: Arc<Mutex<TaixoxoStatus>>) {
             ..
         } = receiver.next_event()
         {
-            let mut thread_bot_status = data.lock().unwrap();
-
             if vk == Vk::Home {
+                let mut thread_bot_status = data.lock().unwrap();
                 if *thread_bot_status == TaixoxoStatus::Enabled {
                     *thread_bot_status = TaixoxoStatus::Disabled;
                     app_info("Bot is currently disabled. Press \"home\" to enable bot.");
@@ -171,11 +175,10 @@ fn wait_keys(data: Arc<Mutex<TaixoxoStatus>>) {
                     *thread_bot_status = TaixoxoStatus::Enabled;
                     app_info("Bot is currently enabled. Press \"home\" to disable bot.");
                 }
-                drop(thread_bot_status);
             } else if vk == Vk::End {
+                let mut thread_bot_status = data.lock().unwrap();
                 app_info("Closing the bot...");
                 *thread_bot_status = TaixoxoStatus::Closing;
-                drop(thread_bot_status);
             }
         }
     }
