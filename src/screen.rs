@@ -17,7 +17,7 @@
 
 use winapi::shared::windef::HDC;
 use winapi::um::wingdi::{GetBValue, GetGValue, GetPixel, GetRValue};
-use winapi::um::winuser::GetDC;
+use winapi::um::winuser::{GetDC, ReleaseDC};
 
 use std::ptr;
 
@@ -29,11 +29,9 @@ pub fn get_screen() -> Screen {
 }
 
 // free screen function for memory safety (unused for now)
-/*
-    pub fn free_screen(screen: Screen) -> bool {
-        (unsafe { ReleaseDC(ptr::null_mut(), screen) }) as u8 == 1
-    }
-*/
+pub fn free_screen(screen: Screen) -> bool {
+    (unsafe { ReleaseDC(ptr::null_mut(), screen) }) as u8 == 1
+}
 
 // get pixel color from x and y position
 pub fn get_pixel(screen: Screen, x: i32, y: i32) -> (u8, u8, u8) {

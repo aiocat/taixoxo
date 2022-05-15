@@ -19,8 +19,20 @@ mod process;
 mod screen;
 
 use std::process::exit;
+use std::sync::{Arc, Mutex};
+use std::thread;
 use std::thread::sleep;
 use std::time::Duration;
+
+use winput::message_loop;
+use winput::{Action, Vk};
+
+#[derive(std::cmp::PartialEq)]
+enum TaixoxoStatus {
+    Enabled,
+    Disabled,
+    Closing,
+}
 
 fn main() {
     let screen_handle = screen::get_screen();
@@ -29,7 +41,7 @@ fn main() {
     // constants for red, blue and yellow taiko
     let (blue_r, blue_g, blue_b) = (60..70, 130..140, 140..180);
     let (red_r, red_g, red_b) = (200..255, 60..70, 40..50);
-    let (yellow_r, yellow_g, yellow_b) = (210..255, 160..180, 0..20);
+    let (yellow_r, yellow_g, yellow_b) = (200..255, 150..190, 0..30);
 
     // title
     println!("Taixoxo v1.1.3 =>");
@@ -93,11 +105,27 @@ fn main() {
         }
     }
 
-    println!("[INFO] Bot initialized! Please don't move your osu! window.");
+    app_info("Bot initialized! Please don't move your osu! window.");
+
+    // run another thread to wait for keys
+    // manage bot status
+    let bot_status = Arc::new(Mutex::new(TaixoxoStatus::Enabled));
+    let thread_bot_status = bot_status.clone();
+    thread::spawn(move || {
+        wait_keys(thread_bot_status);
+    });
 
     // main part of the bot
     let mut need_to_click = true;
     loop {
+        let status = bot_status.lock().unwrap();
+        if *status == TaixoxoStatus::Disabled {
+            continue;
+        } else if *status == TaixoxoStatus::Closing {
+            break;
+        }
+        drop(status);
+
         let (r, g, b) = screen::get_pixel(screen_handle, pos_x, pos_y);
 
         // check pixel
@@ -119,10 +147,46 @@ fn main() {
             need_to_click = true;
         }
     }
+
+    screen::free_screen(screen_handle);
+}
+
+fn wait_keys(data: Arc<Mutex<TaixoxoStatus>>) {
+    let receiver = message_loop::start().unwrap();
+
+    loop {
+        if let message_loop::Event::Keyboard {
+            vk,
+            action: Action::Press,
+            ..
+        } = receiver.next_event()
+        {
+            let mut thread_bot_status = data.lock().unwrap();
+
+            if vk == Vk::Home {
+                if *thread_bot_status == TaixoxoStatus::Enabled {
+                    *thread_bot_status = TaixoxoStatus::Disabled;
+                    app_info("Bot is currently disabled. Press \"home\" to enable bot.");
+                } else {
+                    *thread_bot_status = TaixoxoStatus::Enabled;
+                    app_info("Bot is currently enabled. Press \"home\" to disable bot.");
+                }
+                drop(thread_bot_status);
+            } else if vk == Vk::End {
+                app_info("Closing the bot...");
+                *thread_bot_status = TaixoxoStatus::Closing;
+                drop(thread_bot_status);
+            }
+        }
+    }
 }
 
 fn app_panic(msg: &str) {
     println!("[ERROR] {}", msg);
     sleep(Duration::from_secs(3));
     exit(1);
+}
+
+fn app_info(msg: &str) {
+    println!("[INFO] {}", msg);
 }
