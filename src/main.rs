@@ -138,7 +138,7 @@ impl Taixoxo {
         let (yellow_r, yellow_g, yellow_b) = (200..255, 150..190, 0..30);
 
         // title
-        println!("Taixoxo v1.2.0 =>");
+        println!("Taixoxo v1.3.0 =>");
         println!("- Source Code: github.com/aiocat/taixoxo");
         println!("- License: GNU General Public License v3\n");
 
