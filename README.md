@@ -55,7 +55,8 @@ Don't move `taixoxo.exe` to another folder, instead move `taixoxo` folder to any
 
 ### Keys
 
-- Press `HOME` to enable/disable bot.
+- Press `HOME` to re-calculate the window position. (**focus on osu! window first.**)
+- Press `ALT` to enable/disable bot.
 - Press `END` to quit program safely.
 
 _if you want to see an example, please watch [this](https://www.youtube.com/watch?v=xSlvpcV0C2k) video._
