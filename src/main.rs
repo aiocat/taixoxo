@@ -31,6 +31,7 @@ use winput::{Action, Vk};
 enum TaixoxoStatus {
     Enabled,
     Disabled,
+    Calculating,
     Closing,
 }
 
@@ -142,10 +143,10 @@ impl Taixoxo {
         println!("- License: GNU General Public License v3\n");
 
         // info message
-        println!(
-        "[INFO] Please focus on your osu! window in 5 seconds. (and don't move your osu! window)");
+        println!("[INFO] Please focus on your osu! window in 5 seconds. (and don't move your osu! window)");
         sleep(Duration::from_secs(5));
 
+        // calculate
         self.get_window();
         self.calculate_position();
 
@@ -164,13 +165,18 @@ impl Taixoxo {
         let mut need_to_click = true;
         loop {
             // check bot status
-            let temp_status = status.lock().unwrap();
-            if *temp_status == TaixoxoStatus::Disabled {
-                continue;
-            } else if *temp_status == TaixoxoStatus::Closing {
-                break;
+            {
+                let mut temp_status = status.lock().unwrap();
+                if *temp_status == TaixoxoStatus::Disabled {
+                    continue;
+                } else if *temp_status == TaixoxoStatus::Closing {
+                    break;
+                } else if *temp_status == TaixoxoStatus::Calculating {
+                    self.get_window();
+                    self.calculate_position();
+                    *temp_status = TaixoxoStatus::Enabled;
+                }
             }
-            drop(temp_status);
 
             let (r, g, b) = screen::get_pixel(self.screen, self.position_x, self.position_y);
 
@@ -210,14 +216,22 @@ impl Taixoxo {
                 ..
             } = receiver.next_event()
             {
-                if vk == Vk::Home {
+                if vk == Vk::Alt {
                     let mut thread_bot_status = data.lock().unwrap();
                     if *thread_bot_status == TaixoxoStatus::Enabled {
                         *thread_bot_status = TaixoxoStatus::Disabled;
-                        app_info("Bot is currently disabled. Press \"home\" to enable bot.");
+                        app_info("Bot is currently disabled. Press \"Alt\" to enable bot.");
                     } else {
                         *thread_bot_status = TaixoxoStatus::Enabled;
-                        app_info("Bot is currently enabled. Press \"home\" to disable bot.");
+                        app_info("Bot is currently enabled. Press \"Alt\" to disable bot.");
+                    }
+                } else if vk == Vk::Home {
+                    let mut thread_bot_status = data.lock().unwrap();
+                    if *thread_bot_status != TaixoxoStatus::Enabled {
+                        app_info("You need to enable bot to calculate osu! position again.");
+                    } else {
+                        *thread_bot_status = TaixoxoStatus::Calculating;
+                        app_info("Re-calculated the position!");
                     }
                 } else if vk == Vk::End {
                     let mut thread_bot_status = data.lock().unwrap();
